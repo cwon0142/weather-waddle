@@ -30,10 +30,11 @@ class City(db.Model):
     city_name = db.Column(db.String(50), nullable=False)
     city_climate = db.Column(db.String(300), nullable=True)
 
-    meteo_data = db.relationship('Meteo', backref='city', lazy=True)
+    city_meteo_data = db.relationship('Meteo', backref='city')
 
 class Meteo(db.Model):
-    meteo_id = db.Column(db.Integer, primary_key=True)
+    __tablename__ = "meteo"
+    id = db.Column(db.Integer, primary_key=True)
     city_id = db.Column(db.Integer, db.ForeignKey('city.city_id'), nullable=False)
     month = db.Column(db.String(20), nullable=False)
     average_humidity = db.Column(db.Float, nullable=False)
